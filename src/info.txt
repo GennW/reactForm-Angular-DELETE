@@ -1,0 +1,19 @@
+Подключаем стили
+npm i bootstrap --save
+в angular.json в секции styles node_modules/bootstrap/dist/css/bootstrap.min.css
+
+FormsModule, // Добавляем FormsModule в список импортов
+
+Angular Essentials 
+
+вместо [(ngModel)]="signInForm.password" можно использовать
+[ngModel]="signInForm.password" (ngModelChange)="signInForm.password = $event"
+
+
+ng g d directives/password-validator --skip-tests   26:45min
+
+асинхронный валидатор 38:00
+
+для реактивной формы подключаем ReactiveFormsModule в импорты app.module
+
+остановился 1:14:50

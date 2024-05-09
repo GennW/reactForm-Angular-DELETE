@@ -1,0 +1,116 @@
+<main class="form-signin">
+    <form [formGroup]="signInForm">
+        <img class="mb-4" src="../../../assets/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" 
+            formControlName="email"
+                [class]="{'border-danger': email?.invalid && (email?.dirty || email?.touched)}"
+                placeholder="name@example.com">
+            <label for="floatingInput"
+                [class]="{'text-danger': email?.invalid && (email?.dirty || email?.touched)}">Email address</label>
+
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <div class="text-danger" *ngIf="email?.errors?.['required']">
+                    Укажите свой Email
+                </div>
+                <div class="text-danger" *ngIf="email?.errors?.['email']">
+                    Email не корректный
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" 
+                formControlName="password"
+                placeholder="Password">
+            <label for="floatingPassword">Password</label>
+
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <div class="text-danger" *ngIf="password?.errors?.['required']">
+                    Укажите пароль
+                </div>
+                <div class="text-danger" *ngIf="password?.errors?.['pattern']">
+                    Пароль не корректный
+                </div>
+            </div>
+        </div>
+
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" formControlName="rememberMe"> Remember me
+            </label>
+        </div>
+
+        <div *ngIf="signInForm.invalid && (signInForm.touched || signInForm.dirty) 
+            && signInForm.errors?.['emailAsPassword']" class="text-danger">
+            Пароль не должен совпадать с email!
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="signIn()">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; reactive form</p>
+    </form>
+</main>
+<!-- <main class="form-signin">
+    <form [formGroup]="signInForm" PasswordValidatorNotEmail>
+        <img class="mb-4" src="../../../assets/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" 
+            formControlName="email" email required emailExist
+                [class]="{'border-danger': email?.invalid && (email?.dirty || email?.touched)}"
+                placeholder="name@example.com">
+            <label for="floatingInput"
+                [class]="{'text-danger': email?.invalid && (email?.dirty || email?.touched)}">Email address</label>
+
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <div class="text-danger" *ngIf="email?.errors?.['required']">
+                    Укажите свой Email
+                </div>
+                <div class="text-danger" *ngIf="email?.errors?.['email']">
+                    Email не корректный
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" formControlName="password"
+                passwordValidator="^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)(?=.*[\W_])[a-zA-Zа-яА-Я\d\W_]{8,}$"
+                placeholder="Password">
+            <label for="floatingPassword">Password</label>
+
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <div class="text-danger" *ngIf="password?.errors?.['required']">
+                    Укажите пароль
+                </div>
+                <div class="text-danger" *ngIf="password?.errors?.['pattern']">
+                    Пароль не корректный
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me" formControlName="rememberMe"> Remember me
+            </label>
+        </div>
+
+        <div *ngIf="signInForm.invalid && (signInForm.touched || signInForm.dirty) 
+            && signInForm.errors?.['emailAsPassword']" class="text-danger">
+            Пароль не должен совпадать с email!
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="signIn()">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; reactive form</p>
+    </form>
+</main> -->

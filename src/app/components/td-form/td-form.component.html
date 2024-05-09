@@ -1,0 +1,113 @@
+<main class="form-signin w-100 m-auto">
+  <form #siForm="ngForm" PasswordValidatorNotEmail>
+    <img class="mb-4" src="../assets/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+
+
+    <div class="form-floating">
+      <input type="email" name="email" class="form-control" id="floatingInput" required #email="ngModel" email
+        emailExist [ngModelOptions]="{updateOn: 'blur'}"
+        [class]="{'border-danger': email.invalid && (email.dirty || email.touched)}" [(ngModel)]="signInForm.email"
+        placeholder="name@example.com">
+      <label for="floatingInput" [class]="{'text-danger': email.invalid && (email.dirty || email.touched)}">
+        Email address
+      </label>
+
+      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div class="text-danger" *ngIf="email.errors?.['required']">
+          Укажите свой Email
+        </div>
+        <div class="text-danger" *ngIf="email.errors?.['email']">
+          Email не корректный
+        </div>
+      </div>
+    </div>
+
+    <!-- вариант без директивы -->
+    <!-- <div class="form-floating">
+        <input type="password" name="password" class="form-control" id="floatingPassword" 
+        [ngModel]="signInForm.password" (ngModelChange)="signInForm.password = $event" 
+        pattern="^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)(?=.*[\W_])[a-zA-Zа-яА-Я\d\W_]{8,}$"
+        required 
+        #password="ngModel"
+        [class]="{'border-danger': password.invalid && (password.dirty || password.touched)}"
+        placeholder="Password">
+        <label [class]="{'text-danger': password.invalid && (password.dirty || password.touched)}" 
+        for="floatingPassword">Password</label>
+      
+      
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div class="text-danger" *ngIf="password.errors?.['required']">
+            Укажите пароль
+          </div>
+          <div class="text-danger" *ngIf="password.errors?.['pattern']">
+            Пароль не корректный
+          </div>
+      </div>
+  
+      </div> -->
+
+    <!-- вариант с директивой без передачи значений -->
+    <!-- <div class="form-floating">
+        <input type="password" name="password" class="form-control" id="floatingPassword" 
+        [ngModel]="signInForm.password" (ngModelChange)="signInForm.password = $event" 
+        required passwordValidator
+        #password="ngModel"
+        [class]="{'border-danger': password.invalid && (password.dirty || password.touched)}"
+        placeholder="Password">
+        <label [class]="{'text-danger': password.invalid && (password.dirty || password.touched)}" 
+        for="floatingPassword">Password</label>
+      
+      
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div class="text-danger" *ngIf="password.errors?.['required']">
+            Укажите пароль
+          </div>
+          <div class="text-danger" *ngIf="password.errors?.['pattern']">
+            Пароль не корректный
+          </div>
+      </div>
+  
+      </div> -->
+
+    <!-- вариант с директивой c передачей значений -->
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" id="floatingPassword" 
+      [ngModel]="signInForm.password"
+        (ngModelChange)="signInForm.password = $event" required
+        passwordValidator="^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)(?=.*[\W_])[a-zA-Zа-яА-Я\d\W_]{8,}$" #password="ngModel"
+        [class]="{'border-danger': password.invalid && (password.dirty || password.touched)}" placeholder="Password">
+      <label [class]="{'text-danger': password.invalid && (password.dirty || password.touched)}"
+        for="floatingPassword">Password</label>
+
+
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div class="text-danger" *ngIf="password.errors?.['required']">
+          Укажите пароль
+        </div>
+        <div class="text-danger" *ngIf="password.errors?.['pattern']">
+          Пароль не корректный
+        </div>
+      </div>
+    </div>
+
+    <div class="form-check text-start my-3">
+      <input class="form-check-input" name="rememberMe" type="checkbox" value="remember-me" id="flexCheckDefault"
+        [(ngModel)]="signInForm.rememberMe">
+      <label class="form-check-label" for="flexCheckDefault">
+        Remember me
+      </label>
+    </div>
+    <button [disabled]="siForm.invalid" class="btn btn-primary w-100 py-2" type="submit" (click)="signIn2()">Sign
+      in</button>
+    <br>
+    <hr>
+    <div *ngIf="siForm.invalid && (siForm.touched || siForm.dirty) 
+      && siForm.errors?.['emailAsPassword']" class="text-danger">
+      Пароль не должен совпадать с email!
+    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit" (click)="signIn(siForm)">Sign in</button>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+  </form>
+</main>
